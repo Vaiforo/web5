@@ -115,6 +115,34 @@ footer {
   	font-size: 15pt;
 }
 
+table {
+	width: 94%;
+	margin: 3%;
+	font-size: 20pt;
+	
+	border-collapse: collapse;
+	border: 2px solid #e2d0cd;
+	box-shadow: 0 0 2px 1px #e2d0cd;
+}
+
+th, td {
+	padding: 0.5%;
+}
+
+th {
+	letter-spacing: 1px;
+	color: #5c5755;
+	text-shadow: 0 0 1px #88817f;
+
+	border: 2px solid #e2d0cd;
+	background-color: #fcefec;
+}
+
+td {
+	border-collapse: collapse;
+	border: 2px solid #e2d0cd;
+}
+
 .goida {
   color: #6b4740;
   letter-spacing: 2px;
@@ -148,32 +176,4 @@ footer {
   0%   { color: #fff; text-shadow: 0 0 1px #9d9d9d; transform: scale(1); }
   50%  { color: #ff3b30; text-shadow: 0 0 12px #ff3b30, 0 0 24px #ff3b30; transform: scale(1.08); }
   100% { color: #fff; text-shadow: 0 0 1px #9d9d9d; transform: scale(1); }
-}
-
-table {
-	width: 94%;
-	margin: 3%;
-	font-size: 20pt;
-	
-	border-collapse: collapse;
-	border: 2px solid #e2d0cd;
-	box-shadow: 0 0 2px 1px #e2d0cd;
-}
-
-th, td {
-	padding: 0.5%;
-}
-
-th {
-	letter-spacing: 1px;
-	color: #5c5755;
-	text-shadow: 0 0 1px #88817f;
-
-	border: 2px solid #e2d0cd;
-	background-color: #fcefec;
-}
-
-td {
-	border-collapse: collapse;
-	border: 2px solid #e2d0cd;
 }
