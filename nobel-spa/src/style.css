@@ -1,0 +1,285 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #dedcdc;
+}
+
+.container {
+  width: 60%;
+  margin: 0 auto;
+  box-shadow: 0 0 10px 0 #6b4749;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #faf0f0;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #6b4740;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  width: 30%;
+  color: #f0e5e4;
+  text-shadow: 0 0 1px whitesmoke;
+  letter-spacing: 2px;
+  font-size: 45pt;
+  padding: 1rem;
+  padding-left: 5rem;
+}
+
+.logo span {
+  display: inline-block;
+  transition: color 0.3s;
+}
+
+.logo:hover span {
+  animation: wave 1s linear forwards;
+}
+
+.logo span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.logo span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.logo span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.logo span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.logo span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.logo span:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+.logo span:nth-child(7) {
+  animation-delay: 0.6s;
+}
+
+.logo span:nth-child(8) {
+  animation-delay: 0.7s;
+}
+
+.logo span:nth-child(9) {
+  animation-delay: 0.8s;
+}
+
+.logo span:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+.logo span:nth-child(11) {
+  animation-delay: 1s;
+}
+
+@keyframes wave {
+  0% {
+    color: #f0e5e4;
+    text-shadow: 0 0 1px whitesmoke;
+  }
+
+  50% {
+    color: white;
+    text-shadow: 0 0 10px white;
+  }
+
+  100% {
+    color: #f0e5e4;
+    text-shadow: 0 0 1px whitesmoke;
+  }
+}
+
+.menu-href {
+  color: #dedad3;
+  font-size: 20pt;
+  padding: 0.1rem 5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  transition: all 0.4s ease;
+}
+
+.menu-href:hover {
+  color: #dedcd8;
+  text-shadow: 0 0 1px #f9f7f3;
+  background-color: #61403a;
+  box-shadow: 0 0 10px 10px #61403a;
+
+  transition: all 0.4s ease;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+
+  padding-top: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: #6b4740;
+}
+
+.name {
+  color: #9f7975;
+  text-shadow: 0 0 1px #9f7975;
+  letter-spacing: 2px;
+  font-size: 15pt;
+}
+
+table {
+  width: 94%;
+  margin: 3%;
+  font-size: 20pt;
+
+  border-collapse: collapse;
+  border: 2px solid #e2d0cd;
+  box-shadow: 0 0 2px 1px #e2d0cd;
+}
+
+th,
+td {
+  padding: 0.5%;
+}
+
+th {
+  letter-spacing: 1px;
+  color: #5c5755;
+  text-shadow: 0 0 1px #88817f;
+
+  border: 2px solid #e2d0cd;
+  background-color: #fcefec;
+}
+
+td {
+  border-collapse: collapse;
+  border: 2px solid #e2d0cd;
+}
+
+.goida {
+  color: #6b4740;
+  letter-spacing: 2px;
+  text-shadow: 0 0 1px #6b4740;
+  font-size: 45pt;
+}
+
+.goida span {
+  display: inline-block;
+}
+
+.goida:hover span:nth-child(1) {
+  animation: waveWhite 1s linear infinite;
+  animation-delay: 0s;
+}
+
+.goida:hover span:nth-child(2) {
+  animation: waveBlue 1s linear infinite;
+  animation-delay: 0.2s;
+}
+
+.goida:hover span:nth-child(3) {
+  animation: waveBlue 1s linear infinite;
+  animation-delay: 0.4s;
+}
+
+.goida:hover span:nth-child(4) {
+  animation: waveRed 1s linear infinite;
+  animation-delay: 0.6s;
+}
+
+.goida:hover span:nth-child(5) {
+  animation: waveRed 1s linear infinite;
+  animation-delay: 0.8s;
+}
+
+@keyframes waveWhite {
+  0% {
+    color: #fff;
+    text-shadow: 0 0 1px #9d9d9d;
+    transform: scale(1);
+  }
+
+  50% {
+    color: #fff;
+    text-shadow: 0 0 12px #d8d8d8, 0 0 24px #fff;
+    transform: scale(1.08);
+  }
+
+  100% {
+    color: #fff;
+    text-shadow: 0 0 1px #9d9d9d;
+    transform: scale(1);
+  }
+}
+
+@keyframes waveBlue {
+  0% {
+    color: #fff;
+    text-shadow: 0 0 1px #9d9d9d;
+    transform: scale(1);
+  }
+
+  50% {
+    color: #1e90ff;
+    text-shadow: 0 0 12px #1e90ff, 0 0 24px #1e90ff;
+    transform: scale(1.08);
+  }
+
+  100% {
+    color: #fff;
+    text-shadow: 0 0 1px #9d9d9d;
+    transform: scale(1);
+  }
+}
+
+@keyframes waveRed {
+  0% {
+    color: #fff;
+    text-shadow: 0 0 1px #9d9d9d;
+    transform: scale(1);
+  }
+
+  50% {
+    color: #ff3b30;
+    text-shadow: 0 0 12px #ff3b30, 0 0 24px #ff3b30;
+    transform: scale(1.08);
+  }
+
+  100% {
+    color: #fff;
+    text-shadow: 0 0 1px #9d9d9d;
+    transform: scale(1);
+  }
+}
