@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-	width: 60%;
+	width: 70%;
 	margin: 0 auto;
 	box-shadow: 0 0 10px 0 #6b4749;
 	min-height: 100vh;
@@ -36,7 +36,7 @@ header {
   color: #f0e5e4;
   text-shadow: 0 0 1px whitesmoke;
   letter-spacing: 2px;
-  font-size: 45pt;
+  font-size: 250%;
   padding: 1rem;
   padding-left: 5rem;
 }
@@ -70,7 +70,7 @@ header {
 
 .menu-href {
 	color: #dedad3;
-	font-size: 20pt;
+	font-size: 150%;
 	padding: 0.1rem 5rem;
 	font-weight: bold;
 	letter-spacing: 1px;
@@ -118,7 +118,7 @@ footer {
 table {
 	width: 94%;
 	margin: 3%;
-	font-size: 20pt;
+	font-size: 150%;
 	
 	border-collapse: collapse;
 	border: 2px solid #e2d0cd;
