@@ -1,6 +1,7 @@
 * {
   padding: 0;
   margin: 0;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 html,
@@ -282,4 +283,54 @@ td {
     text-shadow: 0 0 1px #9d9d9d;
     transform: scale(1);
   }
+}
+
+.toolbar {
+  margin: 1rem;
+  display: flex;
+}
+
+.toolbar input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 20pt;
+}
+
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 18pt;
+}
+
+.pagination button {
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  cursor: pointer;
+  font-size: 18pt;
+
+  transition: all 0.4s ease;
+}
+
+.pagination button:hover {
+  box-shadow: 0px 0px 7px #ccc;
+
+  transition: all 0.4s ease;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.loading {
+  font-size: 18pt;
+  color: #ccc;
+  margin: 3rem;
 }

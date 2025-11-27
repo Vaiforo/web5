@@ -1,22 +1,84 @@
 <template>
-    <DataTable :columns="columns" :rows="rows" />
+  <section>
+    <div class="toolbar">
+      <input
+        v-model="filterText"
+        type="text"
+        placeholder="Поиск по категории..."
+      />
+    </div>
+
+    <DataTable :columns="columns" :rows="paginatedRows" />
+
+    <div class="pagination">
+      <button @click="prevPage" :disabled="currentPage === 1">
+        Назад
+      </button>
+      <span>Страница {{ currentPage }} из {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="currentPage === totalPages">
+        Вперёд
+      </button>
+    </div>
+
+    <p v-if="loading" class="loading">Загрузка дичи...</p>
+    <p v-if="error">{{ error }}</p>
+  </section>
 </template>
 
 <script setup>
+import { ref, computed, onMounted } from 'vue'
 import DataTable from '../components/DataTable.vue'
-
-const rows = [
-    { category: 'Физика', date: '10 декабря 2024', grant: '≈ 16 млн SEK' },
-    { category: 'Химия', date: '11 декабря 2024', grant: '≈ 15 млн SEK' },
-    { category: 'Физиология или медицина', date: '12 декабря 2024', grant: '≈ 14 млн SEK' },
-    { category: 'Литература', date: '13 декабря 2024', grant: '≈ 13 млн SEK' },
-    { category: 'Мир', date: '14 декабря 2024', grant: '≈ 12 млн SEK' },
-    { category: 'Экономические науки', date: '15 декабря 2024', grant: '≈ 11 млн SEK' },
-]
+import prizesService from '../services/prizesService.js'
 
 const columns = [
-    { key: 'category', label: 'Категория' },
-    { key: 'date', label: 'Дата награждения' },
-    { key: 'grant', label: 'Размер гранта' },
+  { key: 'category', label: 'Категория' },
+  { key: 'date', label: 'Год награждения' },
+  { key: 'grant', label: 'Сумма премии' },
 ]
+
+const allRows = ref([])
+const loading = ref(false)
+const error = ref('')
+const filterText = ref('')
+const currentPage = ref(1)
+const pageSize = 10
+
+const filteredRows = computed(() => {
+  const text = filterText.value.trim().toLowerCase()
+  if (!text) return allRows.value
+  return allRows.value.filter((row) =>
+    row.category.toLowerCase().includes(text)
+  )
+})
+
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(filteredRows.value.length / pageSize))
+)
+
+const paginatedRows = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  return filteredRows.value.slice(start, start + pageSize)
+})
+
+function prevPage() {
+  if (currentPage.value > 1) currentPage.value--
+}
+
+function nextPage() {
+  if (currentPage.value < totalPages.value) currentPage.value++
+}
+
+onMounted(async () => {
+  loading.value = true
+  error.value = ''
+  try {
+    const rows = await prizesService.getPrizes()
+    allRows.value = rows
+  } catch (e) {
+    error.value = 'Не удалось загрузить данные наград'
+    console.error(e)
+  } finally {
+    loading.value = false
+  }
+})
 </script>
