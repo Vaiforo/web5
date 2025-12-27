@@ -43,7 +43,7 @@ const loading = ref(false)
 const error = ref('')
 
 const page = ref(1)
-const pageSize = 25
+const pageSize = 10
 const total = ref(0)
 
 const year = ref('')
