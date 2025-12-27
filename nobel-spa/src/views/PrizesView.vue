@@ -1,15 +1,24 @@
 <template>
   <section>
     <div class="toolbar">
-      <input v-model="filterText" type="text" placeholder="Фильтр по категории..." />
+      <input v-model="year" type="text" placeholder="Год (например 2024)" />
+      <select v-model="category">
+        <option value="">Все категории</option>
+        <option value="phy">Physics</option>
+        <option value="che">Chemistry</option>
+        <option value="med">Medicine</option>
+        <option value="lit">Literature</option>
+        <option value="pea">Peace</option>
+        <option value="eco">Economics</option>
+      </select>
     </div>
 
-    <DataTable :columns="columns" :rows="paginatedRows" />
+    <DataTable :columns="columns" :rows="rows" />
 
     <div class="pagination">
-      <button @click="prevPage" :disabled="currentPage === 1">Назад</button>
-      <span>Страница {{ currentPage }} из {{ totalPages }}</span>
-      <button @click="nextPage" :disabled="currentPage === totalPages">Вперёд</button>
+      <button @click="prevPage" :disabled="page === 1">Назад</button>
+      <span>Страница {{ page }} из {{ totalPages }}</span>
+      <button @click="nextPage" :disabled="page === totalPages">Вперёд</button>
     </div>
 
     <p v-if="loading">Загрузка...</p>
@@ -18,60 +27,70 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import DataTable from '../components/DataTable.vue'
 import type { ColumnDef } from '../types/table'
 import prizesService, { type PrizeRow } from '../services/prizesService'
 
 const columns: ColumnDef[] = [
   { key: 'category', label: 'Категория' },
-  { key: 'date', label: 'Год награждения' },
-  { key: 'grant', label: 'Сумма премии' },
+  { key: 'date', label: 'Год' },
+  { key: 'grant', label: 'Сумма' },
 ]
 
-const allRows = ref<PrizeRow[]>([])
+const rows = ref<PrizeRow[]>([])
 const loading = ref(false)
-const error = ref<string>('')
-const filterText = ref<string>('')
+const error = ref('')
 
-const currentPage = ref<number>(1)
-const pageSize = 10
+const page = ref(1)
+const pageSize = 25
+const total = ref(0)
 
-const filteredRows = computed(() => {
-  const text = filterText.value.trim().toLowerCase()
-  if (!text) return allRows.value
-  return allRows.value.filter((r) => r.category.toLowerCase().includes(text))
-})
+const year = ref('')
+const category = ref('')
 
-watch(filterText, () => {
-  currentPage.value = 1
-})
+const totalPages = computed(() => Math.max(1, Math.ceil(total.value / pageSize)))
 
-const totalPages = computed(() => Math.max(1, Math.ceil(filteredRows.value.length / pageSize)))
-
-const paginatedRows = computed(() => {
-  const start = (currentPage.value - 1) * pageSize
-  return filteredRows.value.slice(start, start + pageSize)
-})
-
-function prevPage() {
-  if (currentPage.value > 1) currentPage.value--
-}
-
-function nextPage() {
-  if (currentPage.value < totalPages.value) currentPage.value++
-}
-
-onMounted(async () => {
+async function load() {
   loading.value = true
   error.value = ''
   try {
-    allRows.value = await prizesService.getPrizes()
+    const res = await prizesService.getPrizes({
+      page: page.value,
+      pageSize,
+      nobelPrizeYear: year.value.trim() || undefined,
+      nobelPrizeCategory: category.value || undefined,
+    })
+    rows.value = res.rows
+    total.value = res.total
   } catch (e) {
     console.error(e)
-    error.value = 'Не удалось загрузить данные наград'
+    error.value = 'Не удалось загрузить награды'
   } finally {
     loading.value = false
   }
+}
+
+function prevPage() {
+  if (page.value > 1) {
+    page.value--
+    void load()
+  }
+}
+
+function nextPage() {
+  if (page.value < totalPages.value) {
+    page.value++
+    void load()
+  }
+}
+
+watch([year, category], () => {
+  page.value = 1
+  void load()
+})
+
+onMounted(() => {
+  void load()
 })
 </script>
